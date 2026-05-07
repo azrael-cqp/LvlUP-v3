@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -59,7 +58,6 @@
       cursor: pointer; font-family: inherit;
     }
   </style>
-
 </head>
 <body>
   <div id="loading">
@@ -76,7 +74,6 @@
   <div id="root"></div>
 
   <script>
-    // Global error handlers - capture errors with full details
     var errorShown = false;
     function showError(msg) {
       if (errorShown) return;
@@ -107,60 +104,34 @@
     });
   </script>
 
-  <!-- Load React first -->
-
   <script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
-
   <script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
 
-  <!-- Load Babel -->
-
-  <script src="https://unpkg.com/@babel/standalone@7.24.7/babel.min.js"></script>
-
-  <!-- Load and transpile app.jsx then mount -->
+  <!-- Pre-compiled JS - no Babel needed, no JSX issues -->
+  <script src="app.compiled.js"></script>
 
   <script>
     (function() {
-      function loadAndMount() {
-        if (typeof React === 'undefined' || typeof ReactDOM === 'undefined' || typeof Babel === 'undefined') {
-          setTimeout(loadAndMount, 50);
+      function mount() {
+        if (typeof React === 'undefined' || typeof ReactDOM === 'undefined') {
+          setTimeout(mount, 50);
           return;
         }
-        
-        // Fetch app.jsx as text, transpile, then execute
-        fetch('app.jsx?v=' + Date.now())
-          .then(function(r) {
-            if (!r.ok) throw new Error('Failed to fetch app.jsx: ' + r.status);
-            return r.text();
-          })
-          .then(function(jsxCode) {
-            try {
-              var compiled = Babel.transform(jsxCode, { presets: ['react'] }).code;
-              // Execute in global scope so App is available
-              var script = document.createElement('script');
-              script.textContent = compiled + '\nwindow.__App = App;';
-              document.head.appendChild(script);
-              
-              // Now mount
-              if (typeof window.__App !== 'function') {
-                throw new Error('App component not found after script execution');
-              }
-              var root = ReactDOM.createRoot(document.getElementById('root'));
-              root.render(React.createElement(window.__App));
-              
-              var loader = document.getElementById('loading');
-              if (loader) loader.classList.add('hidden');
-            } catch (err) {
-              showError('Compile/Run error:\n' + (err.message || err) + '\n\n' + (err.stack || ''));
-            }
-          })
-          .catch(function(err) {
-            showError('Failed to load app.jsx:\n' + (err.message || err));
-          });
+        if (typeof App === 'undefined') {
+          setTimeout(mount, 50);
+          return;
+        }
+        try {
+          var root = ReactDOM.createRoot(document.getElementById('root'));
+          root.render(React.createElement(App));
+          var loader = document.getElementById('loading');
+          if (loader) loader.classList.add('hidden');
+        } catch (err) {
+          showError('Render error:\n' + (err.message || err) + '\n\n' + (err.stack || ''));
+        }
       }
-      loadAndMount();
+      mount();
     })();
   </script>
-
 </body>
 </html>
