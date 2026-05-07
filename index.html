@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -9,43 +10,55 @@
   <meta name="mobile-web-app-capable" content="yes" />
   <title>Solo Leveling System</title>
 
-  <!-- PWA: Add to Home Screen -->
   <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' fill='%230f172a'/%3E%3Ctext x='50%25' y='55%25' font-size='100' text-anchor='middle' fill='%23a78bfa' font-family='sans-serif' font-weight='bold'%3E%E2%9A%94%3C/text%3E%3C/svg%3E" />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230f172a'/%3E%3Ctext x='50%25' y='60%25' font-size='20' text-anchor='middle' fill='%23a78bfa'%3E%E2%9A%94%3C/text%3E%3C/svg%3E" />
 
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body, #root {
-      height: 100%;
-      width: 100%;
-      background: #0f172a;
-      color: #e2e8f0;
+      height: 100%; width: 100%;
+      background: #0f172a; color: #e2e8f0;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased; overflow-x: hidden;
     }
     #loading {
       position: fixed; inset: 0;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
-      background: #0f172a;
-      color: #a78bfa;
-      font-family: monospace;
-      gap: 16px;
-      z-index: 9999;
+      background: #0f172a; color: #a78bfa;
+      font-family: monospace; gap: 16px; z-index: 9999;
     }
     #loading.hidden { display: none; }
     .pulse {
       width: 60px; height: 60px;
-      border: 3px solid #1e293b;
-      border-top-color: #a78bfa;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
+      border: 3px solid #1e293b; border-top-color: #a78bfa;
+      border-radius: 50%; animation: spin 1s linear infinite;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
     .label { font-size: 12px; letter-spacing: 2px; color: #64748b; }
+    #error-display {
+      position: fixed; inset: 0; display: none;
+      flex-direction: column; padding: 20px;
+      background: #0f172a; color: #fca5a5;
+      font-family: monospace; font-size: 11px;
+      z-index: 9999; overflow: auto;
+    }
+    #error-display.shown { display: flex; }
+    #error-display h2 { color: #ef4444; margin-bottom: 12px; font-size: 14px; letter-spacing: 1px; }
+    #error-display pre {
+      white-space: pre-wrap; word-break: break-all;
+      background: rgba(0,0,0,.5); padding: 12px;
+      border-radius: 6px; border: 1px solid rgba(239,68,68,.3);
+    }
+    #error-display button {
+      margin-top: 12px; padding: 10px;
+      background: rgba(168,85,247,.2);
+      border: 1px solid rgba(168,85,247,.5);
+      border-radius: 6px; color: #c4b5fd;
+      cursor: pointer; font-family: inherit;
+    }
   </style>
+
 </head>
 <body>
   <div id="loading">
@@ -53,33 +66,80 @@
     <div class="label">LOADING SYSTEM...</div>
   </div>
 
+  <div id="error-display">
+    <h2>WARNING APP CRASHED</h2>
+    <pre id="error-message"></pre>
+    <button onclick="location.reload()">RELOAD</button>
+  </div>
+
   <div id="root"></div>
 
-  <!-- React 18 (Production builds, fast) -->
+  <script>
+    window.addEventListener('error', function(e) {
+      var errorEl = document.getElementById('error-display');
+      var errorMsg = document.getElementById('error-message');
+      var loadingEl = document.getElementById('loading');
+      if (errorEl && errorMsg) {
+        errorMsg.textContent = (e.message || 'Unknown error') + '\n\n' + (e.filename || '') + ':' + (e.lineno || '?') + '\n\n' + (e.error && e.error.stack ? e.error.stack : '');
+        errorEl.classList.add('shown');
+      }
+      if (loadingEl) loadingEl.classList.add('hidden');
+    });
+    window.addEventListener('unhandledrejection', function(e) {
+      var errorEl = document.getElementById('error-display');
+      var errorMsg = document.getElementById('error-message');
+      var loadingEl = document.getElementById('loading');
+      if (errorEl && errorMsg) {
+        errorMsg.textContent = 'Promise rejected: ' + (e.reason && e.reason.message ? e.reason.message : e.reason || 'Unknown') + '\n\n' + (e.reason && e.reason.stack ? e.reason.stack : '');
+        errorEl.classList.add('shown');
+      }
+      if (loadingEl) loadingEl.classList.add('hidden');
+    });
+  </script>
+
   <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
 
-  <!-- Babel Standalone (for JSX transpilation in browser) -->
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 
-  <!-- Application Code -->
   <script type="text/babel" data-presets="react" src="app.jsx"></script>
 
-  <!-- Mount Application -->
   <script type="text/babel" data-presets="react">
-    // Wait for App to be defined, then mount
+    var mountAttempts = 0;
     function mount() {
+      mountAttempts++;
       if (typeof App === 'undefined') {
+        if (mountAttempts > 100) {
+          var errorEl = document.getElementById('error-display');
+          var errorMsg = document.getElementById('error-message');
+          if (errorEl && errorMsg) {
+            errorMsg.textContent = 'App component failed to load after 5 seconds.\n\nPossible causes:\n- JSX syntax error in app.jsx\n- Babel failed to transpile\n- React not loaded\n\nCheck browser console for details.';
+            errorEl.classList.add('shown');
+          }
+          document.getElementById('loading').classList.add('hidden');
+          return;
+        }
         setTimeout(mount, 50);
         return;
       }
-      const root = ReactDOM.createRoot(document.getElementById('root'));
-      root.render(<App />);
-      // Hide loader
-      const loader = document.getElementById('loading');
-      if (loader) loader.classList.add('hidden');
+      try {
+        var root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+        var loader = document.getElementById('loading');
+        if (loader) loader.classList.add('hidden');
+      } catch (err) {
+        var errorEl = document.getElementById('error-display');
+        var errorMsg = document.getElementById('error-message');
+        if (errorEl && errorMsg) {
+          errorMsg.textContent = 'Render error: ' + (err.message || err) + '\n\n' + (err.stack || '');
+          errorEl.classList.add('shown');
+        }
+        document.getElementById('loading').classList.add('hidden');
+      }
     }
     mount();
   </script>
+
 </body>
 </html>
