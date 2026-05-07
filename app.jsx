@@ -1453,7 +1453,6 @@ return(
 
       {/* SLEEP TRACKER */}
       {(()=>{
-        const [sH,setSH]=[useState(""),null];
         const sleepLog=g.current.sleepLog||[];
         const last7=sleepLog.slice(-7);
         const avgH=last7.length?(last7.reduce((s,x)=>s+x.hours,0)/last7.length).toFixed(1):"--";
