@@ -83,6 +83,53 @@ const PPL = {
   0:{day:"Sunday",type:"REST",color:"#475569",icon:"⚫",exercises:[]},
 };
 
+// ─── NO GYM WORKOUTS (hotel / vacation / home) ───
+// 5-day routine fara echipament - bodyweight only
+const NO_GYM = {
+  1:{day:"Monday",type:"PUSH (Hotel)",color:"#ef4444",icon:"🔴",exercises:[
+    {name:"Push-ups",sets:"4×15-20",muscle:"Chest",desc:"Standard push-ups. Hands shoulder-width, body straight, lower until chest nearly touches floor. If too easy: feet on chair (decline). Too hard: knees on floor."},
+    {name:"Pike Push-ups",sets:"3×8-12",muscle:"Shoulders",desc:"Hands and feet on floor, hips up high (downward dog position). Lower head towards floor between hands, press back up. Targets shoulders heavily."},
+    {name:"Diamond Push-ups",sets:"3×8-12",muscle:"Triceps",desc:"Hands close together forming a diamond/triangle shape under chest. Lower and press up. Best bodyweight tricep exercise."},
+    {name:"Tricep Dips on Chair",sets:"3×12-15",muscle:"Triceps",desc:"Sit on edge of chair, hands beside hips. Slide off, lower body bending elbows to 90°, press up. Keep elbows pointing back, not out."},
+    {name:"Plank",sets:"3×60s",muscle:"Core",desc:"Forearms on floor, body straight, brace core hard. No sagging hips, no rising butt. Breathe normally. Add 10s each session."},
+    {name:"Pseudo Planche Lean",sets:"3×30s",muscle:"Shoulders/Core",desc:"Push-up position, lean shoulders forward over hands. Feel shoulders working hard. Builds shoulder strength and core stability."},
+  ]},
+  2:{day:"Tuesday",type:"PULL (Hotel)",color:"#3b82f6",icon:"🔵",exercises:[
+    {name:"Towel Rows (Door)",sets:"4×12-15",muscle:"Back",desc:"Wrap thick towel around door handle (close door first!). Lean back holding both ends, pull yourself toward door squeezing shoulder blades. Bodyweight rows substitute."},
+    {name:"Inverted Rows (Table)",sets:"3×10-12",muscle:"Lats",desc:"Sturdy table only! Slide under, grip table edge, body straight, pull chest to table. Test table strength FIRST. Or use 2 chairs with broomstick across."},
+    {name:"Superman Hold",sets:"3×30-45s",muscle:"Lower Back",desc:"Lie face down, arms forward. Lift chest, arms, and legs off floor simultaneously. Hold position. Strengthens posterior chain entirely."},
+    {name:"Reverse Snow Angels",sets:"3×15",muscle:"Rear Delts",desc:"Lie face down, arms at sides palms down. Sweep arms up over head along floor (snow angel motion). Slow and controlled — burns rear delts."},
+    {name:"Doorway Curls",sets:"3×15",muscle:"Biceps",desc:"Stand in doorway, grip frame at hip height palms up. Lean back, pull yourself up using biceps. Or use heavy backpack as makeshift dumbbell."},
+    {name:"Dead Hangs (Door Frame)",sets:"3×30s",muscle:"Grip/Lats",desc:"If door frame is solid: hang from top frame. Decompress spine, build grip. Skip if frame is fragile — use any stable pull-up bar at hotel gym."},
+  ]},
+  3:{day:"Wednesday",type:"LEGS (Hotel)",color:"#22c55e",icon:"🟢",exercises:[
+    {name:"Bodyweight Squats",sets:"4×20-25",muscle:"Quads/Glutes",desc:"Feet shoulder-width, sit back and down to parallel. Drive through heels. High volume since no weight — go slow on negative for more burn."},
+    {name:"Bulgarian Split Squats",sets:"3×12 ea",muscle:"Quads/Glutes",desc:"Back foot on chair/bed, front foot 60cm away. Lower until back knee nearly touches floor. Brutal exercise — single leg builds serious strength."},
+    {name:"Walking Lunges",sets:"3×20 steps",muscle:"Quads/Glutes",desc:"Step forward into deep lunge, back knee almost touching floor. Push off front heel into next step. Hotel hallways are perfect for this."},
+    {name:"Single-leg Glute Bridges",sets:"3×15 ea",muscle:"Glutes/Hams",desc:"Lie on back, one foot on floor, other leg lifted straight. Push hips up squeezing glute hard. Lower with control. ⭐ HAMS PRIORITY."},
+    {name:"Calf Raises",sets:"5×30",muscle:"Calves",desc:"⭐ CALVES PRIORITY. High reps to compensate no weight. Stand on edge of step (or thick book). Rise on toes max height, lower below. Both legs together OR single-leg for extra challenge."},
+    {name:"Wall Sit",sets:"3×60-90s",muscle:"Quads",desc:"Back flat against wall, slide down until thighs parallel to floor (90° at knees). Hold. Quads burn intensely. Increase time each session."},
+  ]},
+  4:{day:"Thursday",type:"FULL BODY HIIT",color:"#a855f7",icon:"🟣",exercises:[
+    {name:"Burpees",sets:"5×10",muscle:"Full Body",desc:"Squat → hands down → jump back to plank → push-up → jump feet back → jump up. The king of bodyweight conditioning. Brutal but efficient."},
+    {name:"Mountain Climbers",sets:"4×30s",muscle:"Core/Cardio",desc:"Plank position, alternate driving knees to chest fast. 30 seconds = nuclear conditioning. Keep hips low, don't bounce."},
+    {name:"Jump Squats",sets:"4×15",muscle:"Quads/Power",desc:"Squat down, explode up jumping as high as possible. Land soft, immediately into next rep. Builds power and burns serious calories."},
+    {name:"Plank to Push-up",sets:"3×10",muscle:"Core/Chest",desc:"Start in forearm plank. Press up to one hand, then other = full push-up position. Reverse back to plank. Alternate leading arm each rep."},
+    {name:"High Knees",sets:"4×30s",muscle:"Cardio",desc:"Run in place driving knees to hip height. Pump arms. 30 seconds full-out, 30 sec rest. Phenomenal cardio without going outside."},
+    {name:"Russian Twists",sets:"3×30 reps",muscle:"Obliques",desc:"Sit, lean back 45°, feet up. Twist torso side to side touching floor. Hold a heavy book/water bottle for resistance."},
+  ]},
+  5:{day:"Friday",type:"CARDIO + CORE",color:"#3b82f6",icon:"🔵",exercises:[
+    {name:"Run/Walk Outside",sets:"30-40 min",muscle:"Cardio",desc:"Steady pace Zone 2 (can hold conversation). Even hotel treadmill works. Maintains your cardio base while you're traveling. NOT all-out sprints."},
+    {name:"Hollow Hold",sets:"3×30-45s",muscle:"Core",desc:"Lie on back, lift legs and shoulders off floor. Lower back PRESSED into floor. Banana shape held. Toughest core exercise that exists."},
+    {name:"Bicycle Crunches",sets:"3×30 reps",muscle:"Core/Obliques",desc:"On back, elbows behind head. Bring opposite elbow to opposite knee, alternating. Slow and controlled — quality over speed."},
+    {name:"Leg Raises",sets:"3×15-20",muscle:"Lower Abs",desc:"Lie flat, hands at sides. Raise legs to vertical, lower slowly without touching floor. Lower abs nightmare — but they grow."},
+    {name:"Side Plank",sets:"3×45s ea side",muscle:"Obliques",desc:"On forearm, body straight on side. Hips lifted, hold. Switch sides. Anti-lateral flexion = serious oblique work."},
+    {name:"Glute Bridges",sets:"3×20",muscle:"Glutes",desc:"On back, knees bent, feet flat. Drive hips up squeezing glutes hard at top. Hold 1 sec. Active recovery for posterior chain."},
+  ]},
+  6:{day:"Saturday",type:"REST",color:"#475569",icon:"⚫",exercises:[]},
+  0:{day:"Sunday",type:"REST",color:"#475569",icon:"⚫",exercises:[]},
+};
+
 const DAILY_Q = [
   {id:"treadmill",label:"30 Min Cardio (Zone 2)",stat:"VIT",xp:30,icon:"🏃"},
   {id:"protein",label:"Protein 220g+ Today",stat:"VIT",xp:25,icon:"🥩"},
@@ -109,14 +156,16 @@ const LIFE_Q_FIXED = [
   {id:"mobility",label:"Mobility Work (10 min)",stat:"AGI",xp:20,icon:"🤸",desc:"Stretch, foam roll, joint mobility"},
 ];
 
+// Days: 0=Sun, 1=Mon, 2=Tue, 3=Wed, 4=Thu, 5=Fri, 6=Sat
+// `days` array = ce zile apare quest-ul; lipsa = oricand
 const BONUS_Q = [
-  {id:"farmercarry",label:"Farmer Carries (3x40m)",stat:"VIT",xp:35,icon:"💼"},
-  {id:"weightedplank",label:"Weighted Plank (3x60s)",stat:"VIT",xp:30,icon:"🪨"},
-  {id:"calfblitz",label:"Calf Raises (100+ reps)",stat:"STR",xp:25,icon:"🦶"},
-  {id:"extrardl",label:"Extra RDL Set (2x10)",stat:"STR",xp:30,icon:"🦿"},
-  {id:"pushups",label:"100 Push-ups",stat:"STR",xp:30,icon:"💪"},
-  {id:"squats",label:"100 Squats",stat:"STR",xp:30,icon:"🦵"},
-  {id:"situps",label:"100 Sit-ups",stat:"VIT",xp:25,icon:"🔥"},
+  {id:"weightedplank",label:"Weighted Plank (3x60s)",stat:"VIT",xp:30,icon:"🪨",days:[1,4],desc:"Core priority - post Push day"},
+  {id:"farmercarry",label:"Farmer Carries (3x40m)",stat:"VIT",xp:35,icon:"💼",days:[2,5],desc:"Core + grip - post Pull day"},
+  {id:"pushups",label:"100 Push-ups",stat:"STR",xp:30,icon:"💪",days:[2],desc:"Tuesday - chest is rested"},
+  {id:"squats",label:"100 Bodyweight Squats",stat:"STR",xp:30,icon:"🦵",days:[4],desc:"Thursday - light activation"},
+  {id:"calfblitz",label:"Calf Raises (100+ reps)",stat:"STR",xp:25,icon:"🦶",days:[5],desc:"Friday - calves recovery from Wed"},
+  {id:"extrardl",label:"Extra RDL Set (2x10 light)",stat:"STR",xp:30,icon:"🦿",days:[6],desc:"Saturday off-day - hamstrings booster"},
+  {id:"situps",label:"100 Sit-ups",stat:"VIT",xp:25,icon:"🔥",days:[6,0],desc:"Weekend core finisher"},
   {id:"coldshower",label:"Cold Shower (5 min)",stat:"VIT",xp:20,icon:"🧊"},
   {id:"nosugar",label:"No Sugar Today",stat:"VIT",xp:20,icon:"🚫"},
 ];
@@ -601,7 +650,8 @@ function App(){
 
   const dC=DAILY_Q.filter(q=>done.includes(q.id)).length;const allD=PENALIZABLE_DAILY.every(q=>done.includes(q.id));
   const lC=LIFE_Q.filter(q=>done.includes(q.id)).length;
-  const vPPL=PPL[selPPL];const wC=WEEKLY_OBJ.filter(q=>doneW.includes(q.id)).length;
+  const ACTIVE_SPLIT = vacation ? NO_GYM : PPL;
+  const vPPL=ACTIVE_SPLIT[selPPL];const wC=WEEKLY_OBJ.filter(q=>doneW.includes(q.id)).length;
   const tLC=doneLessons.length;const curWk=Math.min(Math.floor(tLC/7),7);
   const latestW=weightLog[weightLog.length-1];const goalW=105;const startW=115;
   const progress=Math.max(0,Math.min(100,((startW-latestW.weight)/(startW-goalW))*100));
@@ -674,7 +724,7 @@ function App(){
               <div style={{fontSize:8,color:"#475569",textAlign:"right"}}>Auto-reset</div>
             </div>
             {(()=>{
-              const todayPPL=PPL[new Date().getDay()];
+              const todayPPL=ACTIVE_SPLIT[new Date().getDay()];
               const missedQ=PENALIZABLE_DAILY.filter(q=>!done.includes(q.id)).reduce((s,q)=>s+q.xp,0);
               const missedEx=(todayPPL&&todayPPL.type!=="REST")?todayPPL.exercises.filter(ex=>!doneEx.includes(ex.name)).length*10:0;
               const missedLesson=dailyLessonDone?0:45;
@@ -690,8 +740,16 @@ function App(){
           </div>
           <div style={{fontSize:9,color:"#334155",letterSpacing:2,marginBottom:6}}>▸ DAILY TRAINING</div>
           {DAILY_Q.map(q=>(<button key={q.id} onClick={()=>toggleQ(q.id)} style={{display:"flex",alignItems:"center",gap:10,width:"100%",padding:"10px 12px",marginBottom:4,background:done.includes(q.id)?"rgba(59,130,246,.08)":"rgba(255,255,255,.02)",border:done.includes(q.id)?"1px solid rgba(59,130,246,.3)":"1px solid rgba(255,255,255,.06)",borderRadius:7,cursor:"pointer",textAlign:"left",color:"inherit",fontFamily:"inherit"}}><div style={{width:20,height:20,borderRadius:4,border:done.includes(q.id)?"2px solid #3b82f6":"2px solid rgba(255,255,255,.15)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,background:done.includes(q.id)?"rgba(59,130,246,.15)":"transparent"}}>{done.includes(q.id)&&<span style={{color:"#3b82f6",fontSize:12}}>✓</span>}</div><span style={{fontSize:16,flexShrink:0}}>{q.icon}</span><div style={{flex:1}}><div style={{fontSize:12,color:done.includes(q.id)?"#64748b":"#e2e8f0",textDecoration:done.includes(q.id)?"line-through":"none"}}>{q.label}</div><div style={{fontSize:9,color:"#475569",marginTop:1}}>+{q.xp}XP · {q.stat}</div></div></button>))}
-          <div style={{fontSize:9,color:"#334155",letterSpacing:2,marginTop:14,marginBottom:6}}>▸ BONUS</div>
-          {BONUS_Q.map(q=>(<button key={q.id} onClick={()=>toggleQ(q.id)} style={{display:"flex",alignItems:"center",gap:10,width:"100%",padding:"10px 12px",marginBottom:4,background:done.includes(q.id)?"rgba(59,130,246,.08)":"rgba(255,255,255,.02)",border:done.includes(q.id)?"1px solid rgba(59,130,246,.3)":"1px solid rgba(255,255,255,.06)",borderRadius:7,cursor:"pointer",textAlign:"left",color:"inherit",fontFamily:"inherit"}}><div style={{width:20,height:20,borderRadius:4,border:done.includes(q.id)?"2px solid #3b82f6":"2px solid rgba(255,255,255,.15)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,background:done.includes(q.id)?"rgba(59,130,246,.15)":"transparent"}}>{done.includes(q.id)&&<span style={{color:"#3b82f6",fontSize:12}}>✓</span>}</div><span style={{fontSize:16,flexShrink:0}}>{q.icon}</span><div style={{flex:1}}><div style={{fontSize:12,color:done.includes(q.id)?"#64748b":"#e2e8f0",textDecoration:done.includes(q.id)?"line-through":"none"}}>{q.label}</div><div style={{fontSize:9,color:"#475569",marginTop:1}}>+{q.xp}XP · {q.stat}</div></div></button>))}
+          <div style={{fontSize:9,color:"#334155",letterSpacing:2,marginTop:14,marginBottom:6,display:"flex",justifyContent:"space-between",alignItems:"center"}}>
+            <span>▸ BONUS (TODAY)</span>
+            <span style={{fontSize:7,color:"#64748b"}}>{DOW[new Date().getDay()]}</span>
+          </div>
+          {(()=>{
+            const todayDow=new Date().getDay();
+            const todaysBonus=BONUS_Q.filter(q=>!q.days||q.days.includes(todayDow));
+            if(todaysBonus.length===0)return(<div style={{padding:"10px 12px",background:"rgba(255,255,255,.02)",border:"1px solid rgba(255,255,255,.04)",borderRadius:7,fontSize:10,color:"#64748b",textAlign:"center"}}>No bonus quests today — recovery focus 💤</div>);
+            return todaysBonus.map(q=>(<button key={q.id} onClick={()=>toggleQ(q.id)} style={{display:"flex",alignItems:"center",gap:10,width:"100%",padding:"10px 12px",marginBottom:4,background:done.includes(q.id)?"rgba(59,130,246,.08)":"rgba(255,255,255,.02)",border:done.includes(q.id)?"1px solid rgba(59,130,246,.3)":"1px solid rgba(255,255,255,.06)",borderRadius:7,cursor:"pointer",textAlign:"left",color:"inherit",fontFamily:"inherit"}}><div style={{width:20,height:20,borderRadius:4,border:done.includes(q.id)?"2px solid #3b82f6":"2px solid rgba(255,255,255,.15)",display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0,background:done.includes(q.id)?"rgba(59,130,246,.15)":"transparent"}}>{done.includes(q.id)&&<span style={{color:"#3b82f6",fontSize:12}}>✓</span>}</div><span style={{fontSize:16,flexShrink:0}}>{q.icon}</span><div style={{flex:1}}><div style={{fontSize:12,color:done.includes(q.id)?"#64748b":"#e2e8f0",textDecoration:done.includes(q.id)?"line-through":"none"}}>{q.label}</div>{q.desc&&<div style={{fontSize:8,color:"#475569",marginTop:1}}>{q.desc}</div>}<div style={{fontSize:9,color:"#475569",marginTop:1}}>+{q.xp}XP · {q.stat}</div></div></button>));
+          })()}
           <div style={{fontSize:9,color:"#334155",letterSpacing:2,marginTop:14,marginBottom:6}}>
             <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
               <span>▸ WEEKLY ({wC}/{WEEKLY_OBJ.length})</span>
@@ -713,8 +771,9 @@ function App(){
 
         {/* ===== PPL ===== */}
         {tab==="training"&&(<div>
+          {vacation&&(<div style={{marginBottom:10,padding:"8px 12px",background:"linear-gradient(135deg,rgba(168,85,247,.15),rgba(168,85,247,.05))",border:"1px solid rgba(168,85,247,.3)",borderRadius:7,fontSize:11,color:"#c4b5fd",textAlign:"center",letterSpacing:1}}>🏖️ VACATION MODE — Hotel/Bodyweight workouts active</div>)}
           <div style={{display:"flex",gap:3,marginBottom:14}}>
-            {[1,2,3,4,5,6,0].map(d=>{const p=PPL[d];const iS=d===selPPL;const iT=d===new Date().getDay();return(<button key={d} onClick={()=>setSelPPL(d)} style={{flex:1,padding:"7px 2px",borderRadius:5,cursor:"pointer",background:iS?`${p.color}18`:"rgba(255,255,255,.02)",border:iS?`1px solid ${p.color}55`:iT?"1px solid rgba(59,130,246,.2)":"1px solid rgba(255,255,255,.04)",color:iS?p.color:"#475569",fontSize:8,textAlign:"center"}}><div>{DOW[d]}</div><div style={{fontSize:6,marginTop:1}}>{p.type}</div></button>);})}
+            {[1,2,3,4,5,6,0].map(d=>{const p=ACTIVE_SPLIT[d];const iS=d===selPPL;const iT=d===new Date().getDay();return(<button key={d} onClick={()=>setSelPPL(d)} style={{flex:1,padding:"7px 2px",borderRadius:5,cursor:"pointer",background:iS?`${p.color}18`:"rgba(255,255,255,.02)",border:iS?`1px solid ${p.color}55`:iT?"1px solid rgba(59,130,246,.2)":"1px solid rgba(255,255,255,.04)",color:iS?p.color:"#475569",fontSize:8,textAlign:"center"}}><div>{DOW[d]}</div><div style={{fontSize:6,marginTop:1}}>{p.type}</div></button>);})}
           </div>
           <div style={{background:"linear-gradient(135deg,rgba(15,23,42,.9),rgba(30,41,59,.6))",border:`1px solid ${vPPL.color}33`,borderRadius:10,padding:14}}>
             <div style={{fontSize:16,fontWeight:900,color:vPPL.color,fontFamily:"'Georgia',serif",marginBottom:2}}>{vPPL.icon} {vPPL.type} DAY</div>
